@@ -1,0 +1,19 @@
+Source: qcom-firmware-extract
+Section: misc
+Priority: optional
+Maintainer: Tobias Heider <tobias.heider@canonical.com>
+Build-Depends:
+ debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Vcs-Browser: https://git.launchpad.net/~ubuntu-concept/ubuntu/+source/qcom-firmware-extract
+Vcs-Git: https://git.launchpad.net/~ubuntu-concept/ubuntu/+source/qcom-firmware-extract
+
+Package: qcom-firmware-extract
+Architecture: arm64
+Depends: ${misc:Depends},
+ dislocker
+Description: Script to extract Qualcomm firmware from Windows partition
+ This package contains a script used to extract firmware from Qualcomm
+ Snapdragon X Elite powered machines such as the Thinkpad T14s Gen 6.
+ It serves as a temporary solution until the firmware is redistributable
+ under an appropriate license.
