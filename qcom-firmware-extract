@@ -10,7 +10,7 @@ case "$device_model" in
 	"Lenovo ThinkPad T14s Gen 6")
 		device_path="LENOVO/21N1"
 		;;
-	"Yoga Slim 714Q8X9")
+	"Lenovo Yoga Slim 7x")
 		device_path="LENOVO/83ED"
 	*)
 		echo "Device is currently not supported"
