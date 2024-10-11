@@ -12,6 +12,7 @@ case "$device_model" in
 		;;
 	"Lenovo Yoga Slim 7x")
 		device_path="LENOVO/83ED"
+		;;
 	*)
 		echo "Device is currently not supported"
 		;;
