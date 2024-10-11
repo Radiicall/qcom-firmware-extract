@@ -1,3 +1,10 @@
+qcom-firmware-extract (2) oracular; urgency=medium
+
+  * Fix Lenovo Yoga slim model name
+  * gbp config for branch
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Fri, 11 Oct 2024 02:11:26 +0200
+
 qcom-firmware-extract (1) oracular; urgency=medium
 
   * Initial upload
