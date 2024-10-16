@@ -1,3 +1,9 @@
+qcom-firmware-extract (5) oracular; urgency=medium
+
+  * Add support for Samsung Galaxy Book4 Edge
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Wed, 16 Oct 2024 11:51:04 +0200
+
 qcom-firmware-extract (4) oracular; urgency=medium
 
   * Fix missing ;;
