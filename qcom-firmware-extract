@@ -13,6 +13,9 @@ case "$device_model" in
 	"Lenovo Yoga Slim 7x")
 		device_path="LENOVO/83ED"
 		;;
+	"Samsung Galaxy Book4 Edge")
+		device_path="SAMSUNG/galaxy-book4-edge"
+		;;
 	*)
 		echo "Device is currently not supported"
 		;;
