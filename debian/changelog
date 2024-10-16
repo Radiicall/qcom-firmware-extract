@@ -1,3 +1,9 @@
+qcom-firmware-extract (6) oracular; urgency=medium
+
+  * Initial Asus Vivobook S15 support
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Wed, 16 Oct 2024 15:36:35 +0200
+
 qcom-firmware-extract (5) oracular; urgency=medium
 
   * Add support for Samsung Galaxy Book4 Edge
