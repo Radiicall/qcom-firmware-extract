@@ -10,6 +10,9 @@ case "$device_model" in
 	"ASUS Vivobook S 15")
 		device_path="ASUSTeK/vivobook-s15"
 		;;
+	"Dell XPS 13 9345")
+		device_path="DELL/XPS13"
+		;;
 	"Lenovo ThinkPad T14s Gen 6")
 		device_path="LENOVO/21N1"
 		;;
