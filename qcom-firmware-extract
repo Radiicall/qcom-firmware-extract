@@ -7,6 +7,9 @@ WIN_FW_PATH="Windows/System32/DriverStore/FileRepository"
 
 device_model="$(tr -d '\0' </proc/device-tree/model)"
 case "$device_model" in
+	"ASUS Vivobook S 15")
+		device_path="ASUSTeK/vivobook-s15"
+		;;
 	"Lenovo ThinkPad T14s Gen 6")
 		device_path="LENOVO/21N1"
 		;;
