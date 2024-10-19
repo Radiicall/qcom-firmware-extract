@@ -47,6 +47,11 @@ if [ -z "$part" ]; then
 	nobitlocker=1
 fi
 
+if [ -z "$part" ]; then
+	echo "error: Failed to find windows partition"
+	exit 1
+fi
+
 echo "Mounting Windows partition ${part}..."
 # Decrypt and mount
 if [ -z "$nobitlocker" ]; then
