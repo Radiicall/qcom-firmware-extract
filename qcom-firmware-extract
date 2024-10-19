@@ -41,10 +41,22 @@ trap cleanup EXIT
 # Find BitLocker Partition on NVME
 part=$(lsblk -l -o NAME,FSTYPE | grep nvme0n1 | grep BitLocker | cut -d" " -f1)
 
+# If we cant find a non-bitlocker'd part, pick the first ntfs part and try to mount
+if [ -z "$part" ]; then
+	part=$(lsblk -l -o NAME,FSTYPE | grep -E -m 1 "(^nvme[0-9]n[0-9]p[0-9][[:space:]]ntfs$)" | cut -d" " -f1)
+	nobitlocker=1
+fi
+
 echo "Mounting Windows partition ${part}..."
 # Decrypt and mount
-dislocker --readonly "/dev/$part" -- "$tmpdir/dislocker"
-mount -t ntfs-3g -oloop,ro "$tmpdir/dislocker/dislocker-file" "$tmpdir/mnt"
+if [ -z "$nobitlocker" ]; then
+	dislocker --readonly "/dev/$part" -- "$tmpdir/dislocker"
+	mount -t ntfs-3g -oloop,ro "$tmpdir/dislocker/dislocker-file" "$tmpdir/mnt"
+fi
+
+if [ "$nobitlocker" -eq 1 ]; then
+	mount -t ntfs-3g -o ro "/dev/$part" "$tmpdir/mnt"
+fi
 
 # Create Package boilerplate
 pkgver="$(date +'%Y%m%d')"
