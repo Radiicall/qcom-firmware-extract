@@ -23,7 +23,7 @@ case "$device_model" in
 		device_path="SAMSUNG/galaxy-book4-edge"
 		;;
 	*)
-		echo "Device is currently not supported"
+		printf "error: Device is currently not supported" >&2
 		;;
 esac
 
@@ -48,7 +48,7 @@ if [ -z "$part" ]; then
 fi
 
 if [ -z "$part" ]; then
-	echo "error: Failed to find windows partition"
+	printf "error: Failed to find windows partition" >&2
 	exit 1
 fi
 
