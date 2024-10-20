@@ -11,7 +11,7 @@ case "$device_model" in
 		device_path="ASUSTeK/vivobook-s15"
 		;;
 	"Dell XPS 13 9345")
-		device_path="DELL/xps13-93"
+		device_path="dell/xps13-9345"
 		;;
 	"Lenovo ThinkPad T14s Gen 6")
 		device_path="LENOVO/21N1"
