@@ -1,3 +1,9 @@
+qcom-firmware-extract (7) oracular; urgency=medium
+
+  * Fix Dell XPS 13 9345 firmware path
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Sun, 20 Oct 2024 21:57:45 +0200
+
 qcom-firmware-extract (6) oracular; urgency=medium
 
   * Initial Asus Vivobook S15 support
