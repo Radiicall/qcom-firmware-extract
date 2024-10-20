@@ -1,3 +1,9 @@
+qcom-firmware-extract (8) oracular; urgency=medium
+
+  * Fix previous path
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Sun, 20 Oct 2024 22:09:27 +0200
+
 qcom-firmware-extract (7) oracular; urgency=medium
 
   * Fix Dell XPS 13 9345 firmware path
