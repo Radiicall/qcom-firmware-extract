@@ -42,6 +42,7 @@ trap cleanup EXIT
 part=$(lsblk -l -o NAME,FSTYPE | grep nvme0n1 | grep BitLocker | cut -d" " -f1)
 
 # If we cant find a non-bitlocker'd part, pick the first ntfs part and try to mount
+nobitlocker=0
 if [ -z "$part" ]; then
 	part=$(lsblk -l -o NAME,FSTYPE | grep -E -m 1 "(^nvme[0-9]n[0-9]p[0-9][[:space:]]ntfs$)" | cut -d" " -f1)
 	nobitlocker=1
@@ -54,7 +55,7 @@ fi
 
 echo "Mounting Windows partition ${part}..."
 # Decrypt and mount
-if [ -z "$nobitlocker" ]; then
+if [ "$nobitlocker" -eq 0 ]; then
 	dislocker --readonly "/dev/$part" -- "$tmpdir/dislocker"
 	mount -t ntfs-3g -oloop,ro "$tmpdir/dislocker/dislocker-file" "$tmpdir/mnt"
 fi
