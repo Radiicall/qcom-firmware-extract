@@ -1,3 +1,9 @@
+qcom-firmware-extract (9) oracular; urgency=medium
+
+  * Fix unbound variable error
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Mon, 21 Oct 2024 01:35:21 +0200
+
 qcom-firmware-extract (8) oracular; urgency=medium
 
   * Fix previous path
