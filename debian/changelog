@@ -1,3 +1,9 @@
+qcom-firmware-extract (10) oracular; urgency=medium
+
+  * Add HP Omnibook X 14
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Mon, 21 Oct 2024 16:27:57 +0200
+
 qcom-firmware-extract (9) oracular; urgency=medium
 
   * Fix unbound variable error
