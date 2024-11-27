@@ -25,6 +25,9 @@ case "$device_model" in
 	"Samsung Galaxy Book4 Edge")
 		device_path="SAMSUNG/galaxy-book4-edge"
 		;;
+	"Microsoft Surface Laptop 7 (13.8 inch)")
+		device_path="microsoft/Romulus"
+		;;
 	*)
 		printf "error: Device is currently not supported" >&2
 		;;
