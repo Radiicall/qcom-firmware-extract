@@ -1,3 +1,10 @@
+qcom-firmware-extract (11) oracular; urgency=medium
+
+  [ Joel Stanley ]
+  * Add Microsoft Surface Laptop 7 13"
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Fri, 29 Nov 2024 14:47:28 +0100
+
 qcom-firmware-extract (10) oracular; urgency=medium
 
   * Add HP Omnibook X 14
