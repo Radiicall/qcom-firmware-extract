@@ -28,6 +28,9 @@ case "$device_model" in
 	"Microsoft Surface Laptop 7 (13.8 inch)")
 		device_path="microsoft/Romulus"
 		;;
+	"Acer Swift 14 AI (SF14-11)")
+		device_path="ACER/SF14-11"
+		;;
 	*)
 		printf "error: Device is currently not supported" >&2
 		;;
