@@ -7,6 +7,9 @@ WIN_FW_PATH="Windows/System32/DriverStore/FileRepository"
 
 device_model="$(tr -d '\0' </proc/device-tree/model)"
 case "$device_model" in
+	"Acer Swift 14 AI (SF14-11)")
+		device_path="ACER/SF14-11"
+		;;
 	"ASUS Vivobook S 15")
 		device_path="ASUSTeK/vivobook-s15"
 		;;
@@ -22,14 +25,11 @@ case "$device_model" in
 	"Lenovo Yoga Slim 7x")
 		device_path="LENOVO/83ED"
 		;;
-	"Samsung Galaxy Book4 Edge")
-		device_path="SAMSUNG/galaxy-book4-edge"
-		;;
 	"Microsoft Surface Laptop 7 (13.8 inch)")
 		device_path="microsoft/Romulus"
 		;;
-	"Acer Swift 14 AI (SF14-11)")
-		device_path="ACER/SF14-11"
+	"Samsung Galaxy Book4 Edge")
+		device_path="SAMSUNG/galaxy-book4-edge"
 		;;
 	*)
 		printf "error: Device is currently not supported" >&2
