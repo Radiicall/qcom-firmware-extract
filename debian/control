@@ -1,7 +1,7 @@
 Source: qcom-firmware-extract
 Section: misc
 Priority: optional
-Maintainer: Tobias Heider <tobias.heider@canonical.com>
+Maintainer: Tobias Heider <me@tobhe.de>
 Build-Depends:
  debhelper-compat (= 13)
 Standards-Version: 4.6.2

@@ -84,7 +84,7 @@ cat <<EOF> "${pkgpath}/DEBIAN/control"
 Package: qcom-x1e-firmware-extracted
 Version: ${pkgver}
 Architecture: arm64
-Maintainer: Tobias Heider <tobias.heider@canonical.com>
+Maintainer: Tobias Heider <me@tobhe.de>
 Description: Extracted Snapdragon X Elite firmware for ${device_model}
  This package is automatically generated and includes firmware
  files extracted from a local Windows installation.
