@@ -2,6 +2,7 @@ Source: qcom-firmware-extract
 Section: misc
 Priority: optional
 Maintainer: Tobias Heider <me@tobhe.de>
+Uploaders: Christopher Obbard <obbardc@debian.org>
 Build-Depends:
  debhelper-compat (= 13)
 Standards-Version: 4.6.2
