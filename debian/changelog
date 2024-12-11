@@ -1,4 +1,4 @@
-qcom-firmware-extract (241210.0) unstable; urgency=medium
+qcom-firmware-extract (13) unstable; urgency=medium
 
   * Initial release. (Closes: #1089651)
 
