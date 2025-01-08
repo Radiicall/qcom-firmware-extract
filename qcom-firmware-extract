@@ -118,4 +118,6 @@ dpkg-deb --build "${pkgname}" > /dev/null
 echo "Installing ${pkgname}..."
 apt-get install --reinstall -f "./${pkgname}.deb" > /dev/null
 
+update-initramfs -kall -u
+
 echo -e "$(tput bold)Done! Reboot to load the added firmware files. $(tput sgr0)"
