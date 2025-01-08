@@ -1,3 +1,10 @@
+qcom-firmware-extract (13~ubuntu0) oracular; urgency=medium
+
+  * Fix partition regex
+  * Update initramfs
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Wed, 08 Jan 2025 16:20:59 +0100
+
 qcom-firmware-extract (13) unstable; urgency=medium
 
   * Initial release. (Closes: #1089651)
