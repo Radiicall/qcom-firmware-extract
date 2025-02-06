@@ -5,6 +5,18 @@ set -u
 
 WIN_FW_PATH="Windows/System32/DriverStore/FileRepository"
 
+search_path=""
+while getopts ":d:" opt; do
+	case ${opt} in
+		d)
+			search_path="${OPTARG}"
+			;;
+		?)
+			exit 1
+			;;
+	esac
+done
+
 device_model="$(tr -d '\0' </proc/device-tree/model)"
 case "$device_model" in
 	"Acer Swift 14 AI (SF14-11)")
@@ -44,8 +56,8 @@ mkdir -p "$tmpdir/dislocker"
 mkdir -p "$tmpdir/mnt"
 
 function cleanup {
-	umount -Rf "$tmpdir/mnt"
-	umount -Rf "$tmpdir/dislocker"
+	umount -qRf "$tmpdir/mnt"
+	umount -qRf "$tmpdir/dislocker"
 	rm -rf "$tmpdir"
 }
 trap cleanup EXIT
@@ -65,15 +77,17 @@ if [ -z "$part" ]; then
 	exit 1
 fi
 
-echo "Mounting Windows partition ${part}..."
-# Decrypt and mount
-if [ "$nobitlocker" -eq 0 ]; then
-	dislocker --readonly "/dev/$part" -- "$tmpdir/dislocker"
-	mount -t ntfs-3g -oloop,ro "$tmpdir/dislocker/dislocker-file" "$tmpdir/mnt"
-fi
-
-if [ "$nobitlocker" -eq 1 ]; then
-	mount -t ntfs-3g -o ro "/dev/$part" "$tmpdir/mnt"
+if [ -z "$search_path" ]; then
+	echo "Mounting Windows partition ${part}..."
+	# Decrypt and mount
+	if [ "$nobitlocker" -eq 0 ]; then
+		dislocker --readonly "/dev/$part" -- "$tmpdir/dislocker"
+		mount -t ntfs-3g -oloop,ro "$tmpdir/dislocker/dislocker-file" "$tmpdir/mnt"
+	fi
+	if [ "$nobitlocker" -eq 1 ]; then
+		mount -t ntfs-3g -o ro "/dev/$part" "$tmpdir/mnt"
+	fi
+	search_path="${tmpdir}/mnt/${WIN_FW_PATH}"
 fi
 
 # Create Package boilerplate
@@ -97,7 +111,7 @@ Description: Extracted Snapdragon X Elite firmware for ${device_model}
 EOF
 cd "${tmpdir}"
 
-# Extract Windows FW files
+# Extract FW files
 fw_files="adsp_dtbs.elf
 adspr.jsn
 adsps.jsn
@@ -109,10 +123,10 @@ qcadsp8380.mbn
 qccdsp8380.mbn
 qcdxkmsuc8380.mbn"
 
-echo "Extracting firmware"
+echo "Extracting firmware from $search_path"
 for f_path in ${fw_files}; do
 	echo -e "\t${f_path}"
-	fw_path="$(find "${tmpdir}/mnt/${WIN_FW_PATH}" -name "${f_path}" -exec ls -t {} + | head -n1)"
+	fw_path="$(find "${search_path}" -name "${f_path}" -exec ls -t {} + | head -n1)"
 	cp "${fw_path}" "${pkgpath}/lib/firmware/updates/qcom/x1e80100/${device_path}/"
 done
 chmod -R 0644 "${pkgpath}/lib/firmware/updates/qcom/x1e80100/${device_path}"
