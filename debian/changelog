@@ -1,3 +1,11 @@
+qcom-firmware-extract (13~ubuntu1) oracular; urgency=medium
+
+  * Include device identifier in package name and change install path
+  * Add optional lookup directory argument.
+  * Automatically migrate to new firmware package format if old was installed
+
+ -- Tobias Heider <tobias.heider@canonical.com>  Fri, 07 Feb 2025 01:08:44 +0100
+
 qcom-firmware-extract (13~ubuntu0) oracular; urgency=medium
 
   * Fix partition regex
