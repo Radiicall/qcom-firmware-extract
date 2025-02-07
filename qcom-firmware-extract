@@ -135,6 +135,11 @@ echo "Building package ${pkgname}..."
 # Pack and install
 dpkg-deb --build "${pkgname}" > /dev/null
 
+# Remove diversions
+for f in $(dpkg-divert --list | grep /lib/firmware/qcom/x1e80100| cut -d " " -f 3); do
+	dpkg-divert --remove --rename "$f"
+done
+
 echo "Installing ${pkgname}..."
 DEBIAN_FRONTEND=noninteractive apt-get install \
     --reinstall -f -y "./${pkgname}.deb" > /dev/null
