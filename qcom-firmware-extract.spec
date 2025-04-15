@@ -6,6 +6,7 @@ BuildArch:  aarch64
 License:  GPLv2+
 URL: https://github.com/Radiicall/qcom-firmware-extract
 Source0: qcom-firmware-extract
+Source1: LICENSE
 Requires: dislocker, bash, coreutils, util-linux, grep
 
 %description
