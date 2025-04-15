@@ -191,11 +191,6 @@ echo "Building package ${pkgname}..."
 # Pack and install
 fedpkg --release f${VERSION_ID} local
 
-# Remove diversions
-#for f in $(dpkg-divert --list | grep /lib/firmware/qcom/x1e80100| cut -d " " -f 3); do
-#	dpkg-divert --remove --rename "$f"
-#done
-
 echo "Installing ${pkgname}..."
 dnf list --installed ${pkgname} > /dev/null && dnf reinstall -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null || dnf install -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null
 
