@@ -123,16 +123,16 @@ This package is automatically generated and includes firmware
 files extracted from a local Windows installation.
 
 %prep
-cp ../adsp_dtbs.elf .
-cp ../adspr.jsn .
-cp ../adsps.jsn .
-cp ../adspua.jsn .
-cp ../battmgr.jsn .
-cp ../cdsp_dtbs.elf .
-cp ../cdspr.jsn .
-cp ../qcadsp8380.mbn .
-cp ../qccdsp8380.mbn .
-cp ../qcdxkmsuc8380.mbn .
+cp \$RPM_SOURCE_DIR/adsp_dtbs.elf .
+cp \$RPM_SOURCE_DIR/adspr.jsn .
+cp \$RPM_SOURCE_DIR/adsps.jsn .
+cp \$RPM_SOURCE_DIR/adspua.jsn .
+cp \$RPM_SOURCE_DIR/battmgr.jsn .
+cp \$RPM_SOURCE_DIR/cdsp_dtbs.elf .
+cp \$RPM_SOURCE_DIR/cdspr.jsn .
+cp \$RPM_SOURCE_DIR/qcadsp8380.mbn .
+cp \$RPM_SOURCE_DIR/qccdsp8380.mbn .
+cp \$RPM_SOURCE_DIR/qcdxkmsuc8380.mbn .
 
 %build
 

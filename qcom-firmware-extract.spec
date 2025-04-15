@@ -15,8 +15,8 @@ It serves as a temporary solution until the firmware is redistributable
 under an appropriate license.
 
 %prep
-cp ../qcom-firmware-extract .
-cp ../LICENSE .
+cp $RPM_SOURCE_DIR/qcom-firmware-extract .
+cp $RPM_SOURCE_DIR/LICENSE .
 
 %build
 
