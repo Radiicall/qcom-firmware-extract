@@ -1,0 +1,1 @@
+Forked from https://git.launchpad.net/~ubuntu-concept/ubuntu/+source/qcom-firmware-extract

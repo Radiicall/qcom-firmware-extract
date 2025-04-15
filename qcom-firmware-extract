@@ -92,22 +92,75 @@ fi
 
 # Create Package boilerplate
 pkgver="$(date +'%Y%m%d')"
-pkgname="qcom-x1e-firmware-extracted-${device_canonical}_${pkgver}_arm64"
+pkgname="qcom-x1e-firmware-extracted-${device_canonical}"
 pkgpath="${tmpdir}/${pkgname}"
 mkdir -p "${pkgpath}"
-mkdir -p "${pkgpath}/DEBIAN"
-mkdir -p "${pkgpath}/lib/firmware/updates/qcom/x1e80100/${device_path}"
-cat <<EOF> "${pkgpath}/DEBIAN/control"
-Package: qcom-x1e-firmware-extracted-${device_canonical}
+fw_install_path="/lib/firmware/qcom/x1e80100/${device_path}"
+
+cat <<EOF> "${pkgpath}/qcom-x1e-firmware-extracted-${device_canonical}.spec"
+Name: qcom-x1e-firmware-extracted-${device_canonical}
 Version: ${pkgver}
-Architecture: arm64
-Breaks: qcom-x1e-firmware-extracted
-Replaces: qcom-x1e-firmware-extracted
-Conflicts: qcom-x1e-firmware-extracted
-Maintainer: Tobias Heider <me@tobhe.de>
-Description: Extracted Snapdragon X Elite firmware for ${device_model}
- This package is automatically generated and includes firmware
- files extracted from a local Windows installation.
+Release:  1%{?dist}
+Summary: Extracted Snapdragon X Elite firmware for ${device_model}
+License: LicenseRef-Undefined
+BuildArch:  aarch64
+Source0: adsp_dtbs.elf
+Source1: adspr.jsn
+Source2: adsps.jsn
+Source3: adspua.jsn
+Source4: battmgr.jsn
+Source5: cdsp_dtbs.elf
+Source6: cdspr.jsn
+Source7: qcadsp8380.mbn
+Source8: qccdsp8380.mbn
+Source9: qcdxkmsuc8380.mbn
+
+%global source_date_epoch_from_changelog 0
+
+%description
+Extracted Snapdragon X Elite firmware for ${device_model}
+This package is automatically generated and includes firmware
+files extracted from a local Windows installation.
+
+%prep
+cp ../adsp_dtbs.elf .
+cp ../adspr.jsn .
+cp ../adsps.jsn .
+cp ../adspua.jsn .
+cp ../battmgr.jsn .
+cp ../cdsp_dtbs.elf .
+cp ../cdspr.jsn .
+cp ../qcadsp8380.mbn .
+cp ../qccdsp8380.mbn .
+cp ../qcdxkmsuc8380.mbn .
+
+%build
+
+%install
+mkdir -p %{buildroot}${fw_install_path}
+install -Dm644 adsp_dtbs.elf %{buildroot}${fw_install_path}/adsp_dtbs.elf
+install -Dm644 adspr.jsn %{buildroot}${fw_install_path}/adspr.jsn
+install -Dm644 adsps.jsn %{buildroot}${fw_install_path}/adsps.jsn
+install -Dm644 adspua.jsn %{buildroot}${fw_install_path}/adspua.jsn
+install -Dm644 battmgr.jsn %{buildroot}${fw_install_path}/battmgr.jsn
+install -Dm644 cdsp_dtbs.elf %{buildroot}${fw_install_path}/cdsp_dtbs.elf
+install -Dm644 cdspr.jsn %{buildroot}${fw_install_path}/cdspr.jsn
+install -Dm644 qcadsp8380.mbn %{buildroot}${fw_install_path}/qcadsp8380.mbn
+install -Dm644 qccdsp8380.mbn %{buildroot}${fw_install_path}/qccdsp8380.mbn
+install -Dm644 qcdxkmsuc8380.mbn %{buildroot}${fw_install_path}/qcdxkmsuc8380.mbn
+
+%files
+${fw_install_path}/adsp_dtbs.elf
+${fw_install_path}/adspr.jsn
+${fw_install_path}/adsps.jsn
+${fw_install_path}/adspua.jsn
+${fw_install_path}/battmgr.jsn
+${fw_install_path}/cdsp_dtbs.elf
+${fw_install_path}/cdspr.jsn
+${fw_install_path}/qcadsp8380.mbn
+${fw_install_path}/qccdsp8380.mbn
+${fw_install_path}/qcdxkmsuc8380.mbn
+
 EOF
 cd "${tmpdir}"
 
@@ -127,23 +180,25 @@ echo "Extracting firmware from $search_path"
 for f_path in ${fw_files}; do
 	echo -e "\t${f_path}"
 	fw_path="$(find "${search_path}" -name "${f_path}" -exec ls -t {} + | head -n1)"
-	cp "${fw_path}" "${pkgpath}/lib/firmware/updates/qcom/x1e80100/${device_path}/"
+	cp "${fw_path}" "${pkgpath}/"
 done
-chmod -R 0644 "${pkgpath}/lib/firmware/updates/qcom/x1e80100/${device_path}"
+
+cd ${pkgpath}
+
+source /etc/os-release
 
 echo "Building package ${pkgname}..."
 # Pack and install
-dpkg-deb --build "${pkgname}" > /dev/null
+fedpkg --release f${VERSION_ID} local
 
 # Remove diversions
-for f in $(dpkg-divert --list | grep /lib/firmware/qcom/x1e80100| cut -d " " -f 3); do
-	dpkg-divert --remove --rename "$f"
-done
+#for f in $(dpkg-divert --list | grep /lib/firmware/qcom/x1e80100| cut -d " " -f 3); do
+#	dpkg-divert --remove --rename "$f"
+#done
 
 echo "Installing ${pkgname}..."
-DEBIAN_FRONTEND=noninteractive apt-get install \
-    --reinstall -f -y "./${pkgname}.deb" > /dev/null
+dnf list --installed ${pkgname} > /dev/null && dnf reinstall -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null || dnf install -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null
 
-update-initramfs -kall -u
+dracut --regenerate-all --force
 
 echo -e "$(tput bold)Done! Reboot to load the added firmware files. $(tput sgr0)"
