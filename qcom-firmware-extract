@@ -192,7 +192,9 @@ echo "Building package ${pkgname}..."
 fedpkg --release f${VERSION_ID} local
 
 echo "Installing ${pkgname}..."
-dnf list --installed ${pkgname} > /dev/null && dnf reinstall -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null || dnf install -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null
+dnf list --installed ${pkgname} > /dev/null \
+ && dnf reinstall -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null \
+ || dnf install -y "aarch64/${pkgname}-${pkgver}-1.fc${VERSION_ID}.aarch64.rpm" > /dev/null
 
 dracut --regenerate-all --force
 
