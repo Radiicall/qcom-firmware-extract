@@ -133,11 +133,11 @@ cp \$RPM_SOURCE_DIR/cdspr.jsn .
 cp \$RPM_SOURCE_DIR/qcadsp8380.mbn .
 cp \$RPM_SOURCE_DIR/qccdsp8380.mbn .
 cp \$RPM_SOURCE_DIR/qcdxkmsuc8380.mbn .
+mkdir -p %{buildroot}${fw_install_path}
 
 %build
 
 %install
-mkdir -p %{buildroot}${fw_install_path}
 install -Dm644 adsp_dtbs.elf %{buildroot}${fw_install_path}/adsp_dtbs.elf
 install -Dm644 adspr.jsn %{buildroot}${fw_install_path}/adspr.jsn
 install -Dm644 adsps.jsn %{buildroot}${fw_install_path}/adsps.jsn

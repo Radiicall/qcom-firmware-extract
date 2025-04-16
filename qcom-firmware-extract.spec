@@ -18,11 +18,11 @@ under an appropriate license.
 %prep
 cp $RPM_SOURCE_DIR/qcom-firmware-extract .
 cp $RPM_SOURCE_DIR/LICENSE .
+mkdir -p %{buildroot}%{_bindir}
 
 %build
 
 %install
-mkdir -p %{buildroot}%{_bindir}
 install -Dm755 qcom-firmware-extract %{buildroot}%{_bindir}/qcom-firmware-extract
 
 %files
