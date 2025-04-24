@@ -32,6 +32,5 @@ install -Dm755 qcom-firmware-extract %{buildroot}%{_bindir}/qcom-firmware-extrac
 %changelog
 * Thu Apr 24 2025 Radical <radical@radical.fun> - 2
   * Use /lib/firmware/updates path
-
 * Tue Apr 15 2025 Radical <radical@radical.fun> - 1
   * Initial release
