@@ -95,7 +95,7 @@ pkgver="$(date +'%Y%m%d')"
 pkgname="qcom-x1e-firmware-extracted-${device_canonical}"
 pkgpath="${tmpdir}/${pkgname}"
 mkdir -p "${pkgpath}"
-fw_install_path="/lib/firmware/qcom/x1e80100/${device_path}"
+fw_install_path="/lib/firmware/updates/qcom/x1e80100/${device_path}"
 
 cat <<EOF> "${pkgpath}/qcom-x1e-firmware-extracted-${device_canonical}.spec"
 Name: qcom-x1e-firmware-extracted-${device_canonical}

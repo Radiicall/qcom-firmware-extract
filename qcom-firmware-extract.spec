@@ -1,5 +1,5 @@
 Name: qcom-firmware-extract
-Version:  1
+Version:  2
 Release:  1%{?dist}
 Summary:  Script to extract Qualcomm firmware from Windows partition
 BuildArch:  aarch64
